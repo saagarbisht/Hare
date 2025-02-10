@@ -5,8 +5,19 @@ import { MdMenuOpen } from "react-icons/md";
 import { Link } from "react-router";
 import SearchBar from "./SearchBar";
 import CartDrawer from "../Layout/CartDrawer";
+import { useState } from "react";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+
+  const toggleCartDrawer = () => {
+    setCartDrawerOpen((prev) => !prev);
+  };
+  const toggleNavDrawer = () => {
+    setNavDrawerOpen((prev) => !prev);
+  };
   return (
     <>
       <div className="w-full max-w-7xl mx-auto px-4">
@@ -50,7 +61,7 @@ const Navbar = () => {
             <Link to="/">
               <FaRegUser className="size-5 text-gray-600 hover:text-black" />
             </Link>
-            <button className="relative  cursor-pointer">
+            <button className="relative  cursor-pointer" onClick={toggleCartDrawer}>
               <RiShoppingBag4Line className="w-[22px] h-[22px] text-gray-600 hover:text-black" />
               <span className="absolute text-[10px] h-4 w-4 flex items-center justify-center rounded-full bg-orange-500 text-white -top-1 -right-2">
                 1
@@ -59,13 +70,14 @@ const Navbar = () => {
             <div className="overflow-hidden">
               <SearchBar />
             </div>
-            <button className="md:hidden">
+            <button className="md:hidden text-gray-600 hover:text-black cursor-pointer" onClick={toggleNavDrawer}>
               <MdMenuOpen className="size-6.5" />
             </button>
           </div>
         </nav>
       </div>
-      <CartDrawer />
+      <CartDrawer drawerOpen={cartDrawerOpen} toggleDrawer={toggleCartDrawer}/>
+      <MobileNavbar drawerOpen={navDrawerOpen} toggleDrawer={toggleNavDrawer}/>
     </>
   );
 };
