@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import heroImg from '../../assets/hare-hero.webp'
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md'
 const Hero = () => {
   return (
     <section className='relative'>
@@ -10,7 +11,7 @@ const Hero = () => {
           <p className='text-sm tracking-tighter md:text-lg mb-6 font-outline'>
             Explore our vacatio-ready outfit with fast worldwide shipping.
           </p>
-          <Link to='#' className='bg-gray-200 border text-gray-900 py-2 px-4 md:px-6 rounded-full md:text-lg hover:bg-gray-50 transition'>Shop Now
+          <Link to='#' className='bg-white/70 border border-black text-gray-900 p-2 md:px-6 rounded-full md:text-lg hover:bg-white hover:border-white transition flex items-center gap-3  w-44 mx-auto'>Shop Now <MdKeyboardDoubleArrowRight />
           </Link>
         </div>  
       </div>
