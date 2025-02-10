@@ -1,5 +1,6 @@
-import Header from "../Common/Header"
-import Footer from "../Common/Footer"
+import Header from "../Common/Header";
+import Footer from "../Common/Footer";
+import { Outlet } from "react-router";
 
 const UserLayout = () => {
   return (
@@ -9,7 +10,7 @@ const UserLayout = () => {
 
         {/* Main */}
         <main className="flex-1">
-
+          <Outlet/>
         </main>
         
         {/* Footer */}
