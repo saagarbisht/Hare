@@ -11,7 +11,7 @@ const Hero = () => {
           <p className='text-sm tracking-tighter md:text-lg mb-6 font-outline'>
             Explore our vacatio-ready outfit with fast worldwide shipping.
           </p>
-          <Link to='#' className='bg-white/70 border border-black text-gray-900 p-2 md:px-6 rounded-full md:text-lg hover:bg-white hover:border-white transition flex items-center gap-3  w-44 mx-auto'>Shop Now <MdKeyboardDoubleArrowRight />
+          <Link to='#' className='bg-white/70 border border-black text-gray-900 p-2 md:px-6 rounded-full md:text-lg hover:bg-white hover:border-white transition flex items-center justify-center gap-3 w-36 sm:w-44 mx-auto'>Shop Now <MdKeyboardDoubleArrowRight />
           </Link>
         </div>  
       </div>

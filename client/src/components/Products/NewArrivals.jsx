@@ -1,7 +1,11 @@
-import { HiChevronDoubleRight } from "react-icons/hi2";
-import { HiOutlineChevronDoubleLeft } from "react-icons/hi";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FaChevronRight } from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa6";
 import { Link } from "react-router";
-import { useRef, useState } from "react";
+import Slider from "react-slick";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { useRef } from "react";
 const newArrivals = [
   {
     _id: 1,
@@ -91,42 +95,110 @@ const newArrivals = [
       },
     ],
   },
-
 ];
-const NewArrivals = () => {
-  const scrollRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
 
-  return <section className="relative">
-    <h2 className="text-3xl font-bold mb-4 text-center">Explore New Arrivals</h2>
-    <p className="text-lg text-gray-600 mb-8 text-center">
-      Disover the latest styles straight off the runway, freshly added to keep your wardrobe on the cutting edge of fashion. 
-    </p>
-    <div className="absolute right-4 top-0  flex space-x-4">
-      <button className="p-2 rounded border bg-white text-black">
-      <HiOutlineChevronDoubleLeft className="size-5"/>
-      </button>
-      <button className="p-2 rounded border bg-white text-black">
-      <HiChevronDoubleRight className="size-5"/>
-      </button>
-    </div>
-    <div ref={scrollRef} className="mx-auto overflow-x-scroll flex space-x-6 relative px-4">
-      {newArrivals.map(product => (
-        <div key={product._id} className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative">
-            <img src={product.images[0]?.url} alt={product.images?.altText || product.name} className="w-full h-[420px] object-cover rounded-lg"/>
-            <div className="absolute bottom-0 left-0 right-0 bg-white/50 p-4 backdrop-blur-md text-white rounded-b-lg">
-              <Link to={`/product/${product._id}`}>
-                <h4 className="font-medium">{product.name}</h4>
-                <p className="mt-1">&#8377;{product.price}</p>
-              </Link>
+const NewArrivals = () => {
+  let sliderRef = useRef(null);
+  const next = () => {
+    sliderRef.slickNext();
+  };
+  const previous = () => {
+    sliderRef.slickPrev();
+  };
+  const settings = {
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+    ],
+  };
+  return (
+    <div className="slider-container w-full max-w-7xl mx-auto ">
+      <div className="text-center mb-12 px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+          Explore New Arrivals
+        </h2>
+        <p className="text-gray-600 font-medium text-sm">
+          Discover the latest syles straight off the runway, freshly added to
+          keep your wardrobe on the cutting edge of fashion.
+        </p>
+      </div>
+      <div className="relative overflow-hidden">
+        <Slider
+          ref={(slider) => {
+            sliderRef = slider;
+          }}
+          {...settings}
+        >
+          {newArrivals.map((product) => (
+            <div key={product._id} className="product-card px-1 sm:px-2">
+              <img
+                src={product.images[0].url}
+                alt={product.images[0].altText}
+                className="w-full h-[300px] object-cover aspect-square"
+              />
+              <div className="py-2 px-4 border border-gray-200 flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-semibold">{product.name}</h3>
+                  <p className="text-sm font-medium">&#8377;{product.price}</p>
+                </div>
+                <div>
+                  <Link
+                    to={`/product/${product._id}`}
+                    className="text-black flex items-center justify-center hover:bg-black hover:border-black hover:text-white transition gap-2 border border-black py-1.5 px-3 rounded-full text-sm sm:text-base  sm:w-36 mx-auto"
+                  >
+                    Shop Now <MdKeyboardDoubleArrowRight />
+                  </Link>
+                </div>
+              </div>
             </div>
+          ))}
+        </Slider>
+        <div>
+          <button
+            onClick={previous}
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/50 border p-2 rounded-full"
+          >
+            <FaChevronLeft className="size-6" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white/50 border p-2 rounded-full"
+          >
+            <FaChevronRight className="size-6" />
+          </button>
         </div>
-      ))}
+      </div>
+      <div></div>
     </div>
-  </section>;
+  );
 };
 
 export default NewArrivals;
