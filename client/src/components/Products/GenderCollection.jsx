@@ -5,8 +5,8 @@ import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 const GenderCollection = () => {
   return (
-    <section className="">
-      <div className="flex flex-col md:flex-row gap-6">
+    <section className="pt-6">
+      <div className="flex flex-col gap-10 md:flex-row md:gap-6">
         <div className="relative flex-1">
           <img
             src={wommensCollection}

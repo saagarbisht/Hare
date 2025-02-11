@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import {toast} from 'sonner';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import ProductGrid from "./ProductGrid";
 
 const selectedProduct = {
   _id: 1,
@@ -22,21 +25,87 @@ const selectedProduct = {
     },
   ],
 };
+const similarProducts = [
+  {
+    _id: 2,
+    name: "Product Name 2",
+    price: 120,
+    images:[
+      {
+        url:'https://picsum.photos/1500/1500?random=4',
+        altText:'Product Image'
+      }
+    ]
+  },
+  {
+    _id: 3,
+    name: "Product Name 3",
+    price: 130,
+    images:[
+      {
+        url:'https://picsum.photos/1500/1500?random=5',
+        altText:'Product Image'
+      }
+    ]
+    },
+  {
+    _id: 4,
+    name: "Product Name 4",
+    price: 140,
+    images:[
+      {
+        url:'https://picsum.photos/1500/1500?random=6',
+        altText:'Product Image'
+      }
+    ]
+  },
+  {
+    _id: 5,
+    name: "Product Name 5",
+    price: 150,
+    images:[
+      {
+        url:'https://picsum.photos/1500/1500?random=7',
+        altText:'Product Image'
+      }
+    ]
+  },
+]
 const ProductDetails = () => {
-  const [selectedImage, setSectedImage] = useState("");
+  const [selectedImage, setSectedImage] = useState(null);
+  const [addingToCart,setAddingToCart] = useState(false);
   const [userSelected, setUserSelected] = useState({
     size: "",
     color: "",
     quantity: 1,
   });
+  const handleAddToCart = () => {
+    if (!userSelected.color) {
+      toast.error("Please select color before adding",{duration: 1000});
+      return;
+    };
+    if (!userSelected.size) {
+      toast.error("Please select size before adding",{duration: 1000});
+      return;
+    };
+    new Promise((resolve) => {
+      setAddingToCart(true);
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    }).then(() => {
+      setAddingToCart(false);
+      toast.success("Product added to cart",{duration: 1000});
+    });
+  }
   useEffect(() => {
     if (selectedProduct.images.length > 0) {
       setSectedImage(selectedProduct.images[0]?.url);
     }
   }, [selectedProduct.images]);
   return (
-    <div className="p-6">
-      <div className="max-w-6xl auto bgwhite p-4 sm:p-8 rounded-lg">
+    <div className="p-6 mx-auto">
+      <div className="bg-white p-4 sm:p-8 rounded-lg">
         <div className="flex flex-col md:flex-row">
           <div className="hidden md:flex flex-col space-y-4 mr-6">
             {selectedProduct.images.map((image, index) => (
@@ -173,8 +242,17 @@ const ProductDetails = () => {
                 </button>
               </div>
             </div>
-            <button className="bg-black text-white py-2 px-6 rounded w-full mb-4 cursor-pointer">
-              ADD TO CART
+            <button disabled={addingToCart} className={`bg-black text-white py-2 px-6 rounded w-full mb-4 cursor-pointer ${addingToCart&&"bg-black/50 cursor-not-allowed"}`} onClick={handleAddToCart}>
+              {addingToCart ?
+              (
+                <span className="flex items-center justify-center gap-2">
+                  <AiOutlineLoading3Quarters className="animate-spin"/> Adding to cart
+                </span>
+              ) :
+              <span>
+              Add to cart
+              </span>
+              }
             </button>
             <div className="mt-6 text-gray-700">
               <h3 className="text-xl font-bold mb-4">Characteristics:</h3>
@@ -192,6 +270,10 @@ const ProductDetails = () => {
               </table>
             </div>
           </div>
+        </div>
+        <div className="mt-16">
+          <h2 className="text-2xl text-center font-medium mb-4">You May Also Like</h2>
+          <ProductGrid products={similarProducts}/>
         </div>
       </div>
     </div>

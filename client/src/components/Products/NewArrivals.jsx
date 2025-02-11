@@ -140,7 +140,7 @@ const NewArrivals = () => {
     ],
   };
   return (
-    <div className="slider-container w-full max-w-7xl mx-auto ">
+    <div className="slider-container pt-10">
       <div className="text-center mb-12 px-4">
         <h2 className="text-2xl sm:text-3xl font-bold mb-2">
           Explore New Arrivals
@@ -158,27 +158,21 @@ const NewArrivals = () => {
           {...settings}
         >
           {newArrivals.map((product) => (
-            <div key={product._id} className="product-card px-1 sm:px-2">
+            <Link key={product._id} className="product-card px-1 sm:px-2" to={`/product/${product._id}`}>
               <img
                 src={product.images[0].url}
                 alt={product.images[0].altText}
-                className="w-full h-[300px] object-cover aspect-square"
+                className="w-full h-96 object-cover aspect-square"
               />
-              <div className="py-2 px-4 border border-gray-200 flex justify-between items-center">
+              <div className="py-2 px-4 border border-gray-200 flex  items-center">
                 <div>
                   <h3 className="text-lg font-semibold">{product.name}</h3>
                   <p className="text-sm font-medium">&#8377;{product.price}</p>
                 </div>
                 <div>
-                  <Link
-                    to={`/product/${product._id}`}
-                    className="text-black flex items-center justify-center hover:bg-black hover:border-black hover:text-white transition gap-2 border border-black py-1.5 px-3 rounded-full text-sm sm:text-base  sm:w-36 mx-auto"
-                  >
-                    Shop Now <MdKeyboardDoubleArrowRight />
-                  </Link>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </Slider>
         <div>
