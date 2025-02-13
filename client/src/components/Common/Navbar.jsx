@@ -20,7 +20,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="w-full max-w-7xl mx-auto px-4 mt-9">
         <nav className="flex justify-between items-center py-3">
           <div>
             <Link
@@ -33,7 +33,7 @@ const Navbar = () => {
           </div>
           <div className="hidden md:flex space-x-6">
             <Link
-              to="/"
+              to="/collections/all"
               className="text-gray-600 hover:text-black text-base font-medium "
             >
               Men
@@ -58,7 +58,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex items-center space-x-5">
-            <Link to="/">
+            <Link to="/profile">
               <FaRegUser className="size-5 text-gray-600 hover:text-black" />
             </Link>
             <button className="relative  cursor-pointer" onClick={toggleCartDrawer}>
