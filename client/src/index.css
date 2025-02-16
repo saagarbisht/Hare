@@ -17,6 +17,15 @@
   }
 }
 
+.sidebar {
+  transition: transform 0.3s ease-in-out; /* Adjust duration as needed */
+  transform: translateX(-100%); /* Initially hidden */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Shown when open class is present */
+}
+
 .loader {
   width: 60px;
   aspect-ratio: 2;

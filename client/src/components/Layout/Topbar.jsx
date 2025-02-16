@@ -4,7 +4,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 
 const Topbar = () => {
   return (
-    <div className="fixed w-full bg-orange-500 text-white z-50">
+    <div className="absolute w-full bg-orange-500 text-white z-50">
       <div className="w-full max-w-7xl mx-auto sm:px-4">
         <div className="flex justify-between items-center py-2">
           <div className="hidden sm:flex items-center space-x-4">

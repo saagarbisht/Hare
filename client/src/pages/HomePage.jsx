@@ -1,3 +1,4 @@
+import { useLocation } from "react-router"
 import Hero from "../components/Layout/Hero"
 import FeaturedCollection from "../components/Products/FeaturedCollection"
 import FeatureSection from "../components/Products/FeatureSection"
@@ -5,6 +6,7 @@ import GenderCollection from "../components/Products/GenderCollection"
 import NewArrivals from "../components/Products/NewArrivals"
 import ProductDetails from "../components/Products/ProductDetails"
 import ProductGrid from "../components/Products/ProductGrid"
+import { useEffect } from "react"
 
 const womenRecommendation = [
   {
@@ -98,6 +100,10 @@ const womenRecommendation = [
 ]
 
 const HomePage = () => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[location]);
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col space-y-6 pb-6">
       <Hero/>

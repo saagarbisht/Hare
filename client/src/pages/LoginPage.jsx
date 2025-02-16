@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Link, Navigate } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router";
 import { BiLoaderCircle } from "react-icons/bi";
 
 const LoginPage = () => {
+  const location = useLocation();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -16,6 +17,9 @@ const LoginPage = () => {
         setLoading(false)
       }, 2000);
   };
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[location]);
   return (
     <form
       className="w-full max-w-md mx-auto bg-white p-8 rounded-lg border shadow-sm space-y-6"

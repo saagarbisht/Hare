@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {toast} from 'sonner';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import ProductGrid from "./ProductGrid";
+import { useLocation } from "react-router";
 
 const selectedProduct = {
   _id: 1,
@@ -72,6 +73,7 @@ const similarProducts = [
   },
 ]
 const ProductDetails = () => {
+  const location = useLocation();
   const [selectedImage, setSectedImage] = useState(null);
   const [addingToCart,setAddingToCart] = useState(false);
   const [userSelected, setUserSelected] = useState({
@@ -103,9 +105,13 @@ const ProductDetails = () => {
       setSectedImage(selectedProduct.images[0]?.url);
     }
   }, [selectedProduct.images]);
+  
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[location]);
   return (
-    <div className="p-6 mx-auto">
-      <div className="bg-white p-4 sm:p-8 rounded-lg">
+    <div className="p-4 sm:p-6 mx-auto">
+      <div className="bg-white p-2 sm:p-8 rounded-lg">
         <div className="flex flex-col md:flex-row">
           <div className="hidden md:flex flex-col space-y-4 mr-6">
             {selectedProduct.images.map((image, index) => (
